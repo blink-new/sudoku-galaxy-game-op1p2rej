@@ -9,6 +9,7 @@ interface CompletionModalProps {
   isOpen: boolean;
   onClose: () => void;
   onNewGame: () => void;
+  onGoHome: () => void;
   timer: number;
   difficulty: Difficulty;
   coinsEarned: number;
@@ -20,6 +21,7 @@ export function CompletionModal({
   isOpen,
   onClose,
   onNewGame,
+  onGoHome,
   timer,
   difficulty,
   coinsEarned,
@@ -103,19 +105,28 @@ export function CompletionModal({
           </div>
 
           {/* Actions */}
-          <div className="flex gap-3">
+          <div className="flex flex-col gap-3">
+            <div className="flex gap-3">
+              <Button
+                variant="outline"
+                className="flex-1 border-slate-600 text-slate-300 hover:bg-slate-700"
+                onClick={onClose}
+              >
+                View Board
+              </Button>
+              <Button
+                className="flex-1 bg-indigo-600 hover:bg-indigo-500 text-white"
+                onClick={onNewGame}
+              >
+                New Game
+              </Button>
+            </div>
             <Button
               variant="outline"
-              className="flex-1 border-slate-600 text-slate-300 hover:bg-slate-700"
-              onClick={onClose}
+              className="w-full border-slate-600 text-slate-300 hover:bg-slate-700"
+              onClick={onGoHome}
             >
-              View Board
-            </Button>
-            <Button
-              className="flex-1 bg-indigo-600 hover:bg-indigo-500 text-white"
-              onClick={onNewGame}
-            >
-              New Game
+              Go Home
             </Button>
           </div>
         </div>

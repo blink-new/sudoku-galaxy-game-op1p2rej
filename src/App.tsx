@@ -231,6 +231,10 @@ function App() {
         isOpen={isCompletionModalOpen}
         onClose={() => setIsCompletionModalOpen(false)}
         onNewGame={handleNewGame}
+        onGoHome={() => {
+          setIsCompletionModalOpen(false);
+          handleGoHome();
+        }}
         timer={gameState.timer}
         difficulty={gameState.difficulty}
         coinsEarned={coinsEarned}
