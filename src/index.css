@@ -1,0 +1,158 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --primary: 239 68% 68%;
+  --accent: 43 96% 56%;
+  --background: 240 21% 9%;
+  --dark-mode: 240 17% 17%;
+  --foreground: 0 0% 98%;
+  --muted: 240 17% 17%;
+  --muted-foreground: 240 5% 64%;
+  --border: 240 17% 17%;
+  --input: 240 17% 17%;
+  --card: 240 17% 17%;
+  --card-foreground: 0 0% 98%;
+  --popover: 240 17% 17%;
+  --popover-foreground: 0 0% 98%;
+  --primary-foreground: 0 0% 98%;
+  --secondary: 240 17% 17%;
+  --secondary-foreground: 0 0% 98%;
+  --accent-foreground: 0 0% 9%;
+  --destructive: 0 84% 60%;
+  --destructive-foreground: 0 0% 98%;
+  --ring: 239 68% 68%;
+  --radius: 0.5rem;
+}
+
+* {
+  border-color: hsl(var(--border));
+}
+
+body {
+  color: hsl(var(--foreground));
+  background: hsl(var(--background));
+  font-family: Inter, sans-serif;
+  overflow-x: hidden;
+}
+
+/* Space theme background */
+.space-bg {
+  background: radial-gradient(ellipse at center, #1a1a2e 0%, #0f0f23 100%);
+  position: relative;
+}
+
+.space-bg::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: 
+    radial-gradient(2px 2px at 20px 30px, #fff, transparent),
+    radial-gradient(2px 2px at 40px 70px, rgb(255 255 255 / 80%), transparent),
+    radial-gradient(1px 1px at 90px 40px, rgb(255 255 255 / 60%), transparent),
+    radial-gradient(1px 1px at 130px 80px, rgb(255 255 255 / 40%), transparent),
+    radial-gradient(2px 2px at 160px 30px, rgb(255 255 255 / 70%), transparent);
+  background-repeat: repeat;
+  background-size: 200px 100px;
+  animation: twinkle 4s ease-in-out infinite alternate;
+  pointer-events: none;
+}
+
+@keyframes twinkle {
+  0% { opacity: 30%; }
+  100% { opacity: 80%; }
+}
+
+/* Sudoku grid animations */
+.cell-highlight {
+  background: rgb(99 102 241 / 20%);
+  transition: all 0.2s ease;
+}
+
+.cell-related {
+  background: rgb(99 102 241 / 10%);
+}
+
+.cell-duplicate {
+  background: rgb(239 68 68 / 20%);
+  animation: pulse-error 0.5s ease-in-out;
+}
+
+@keyframes pulse-error {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+}
+
+.number-input {
+  font-family: 'JetBrains Mono', monospace;
+  font-weight: 600;
+}
+
+.notes-text {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.6rem;
+  font-weight: 400;
+}
+
+/* Theme-specific styles */
+.theme-space .sudoku-cell {
+  background: rgb(26 26 46 / 80%);
+  border: 1px solid rgb(99 102 241 / 30%);
+  backdrop-filter: blur(10px);
+}
+
+.theme-space .sudoku-number {
+  color: #e2e8f0;
+  text-shadow: 0 0 10px rgb(99 102 241 / 50%);
+}
+
+.theme-nature .sudoku-cell {
+  background: rgb(34 197 94 / 10%);
+  border: 2px solid rgb(34 197 94 / 30%);
+  border-radius: 8px;
+}
+
+.theme-nature .sudoku-number {
+  color: #22c55e;
+  font-family: Inter, sans-serif;
+  font-style: italic;
+}
+
+.theme-cyberpunk .sudoku-cell {
+  background: rgb(6 182 212 / 10%);
+  border: 1px solid #06b6d4;
+  box-shadow: 0 0 5px rgb(6 182 212 / 30%);
+}
+
+.theme-cyberpunk .sudoku-number {
+  color: #06b6d4;
+  text-shadow: 0 0 8px rgb(6 182 212 / 80%);
+  font-family: 'JetBrains Mono', monospace;
+}
+
+/* Completion celebration */
+@keyframes celebration {
+  0% { transform: scale(1) rotate(0deg); }
+  25% { transform: scale(1.1) rotate(5deg); }
+  50% { transform: scale(1.2) rotate(-5deg); }
+  75% { transform: scale(1.1) rotate(3deg); }
+  100% { transform: scale(1) rotate(0deg); }
+}
+
+.celebrate {
+  animation: celebration 0.6s ease-in-out;
+}
+
+/* Responsive design */
+@media (width <= 768px) {
+  .sudoku-grid {
+    max-width: 90vw;
+  }
+  
+  .number-input {
+    font-size: 1.2rem;
+  }
+}
