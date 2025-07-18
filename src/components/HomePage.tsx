@@ -2,15 +2,16 @@ import React from 'react';
 import { Button } from './ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from './ui/card';
 import { Badge } from './ui/badge';
-import { Sparkles, Star, Trophy, Clock } from 'lucide-react';
+import { Sparkles, Star, Trophy, Clock, ShoppingBag, Palette } from 'lucide-react';
 import type { Difficulty, GameStats } from '../types/sudoku';
 
 interface HomePageProps {
   stats: GameStats;
   onStartGame: (difficulty: Difficulty) => void;
+  onOpenShop: () => void;
 }
 
-export function HomePage({ stats, onStartGame }: HomePageProps) {
+export function HomePage({ stats, onStartGame, onOpenShop }: HomePageProps) {
   const getDifficultyInfo = (difficulty: Difficulty) => {
     switch (difficulty) {
       case 'easy':
@@ -45,13 +46,25 @@ export function HomePage({ stats, onStartGame }: HomePageProps) {
   };
 
   return (
-    <div className="min-h-screen space-bg theme-space">
+    <div className={`min-h-screen space-bg theme-${stats.currentTheme}`}>
       <div className="container mx-auto px-4 py-8 max-w-md">
         {/* Header */}
         <div className="text-center mb-8">
-          <div className="flex items-center justify-center gap-2 mb-4">
-            <Sparkles className="w-8 h-8 text-indigo-400" />
-            <h1 className="text-3xl font-bold text-white">Sudoku Galaxy</h1>
+          <div className="flex items-center justify-between mb-4">
+            <div className="w-10"></div> {/* Spacer */}
+            <div className="flex items-center gap-2">
+              <Sparkles className="w-8 h-8 text-indigo-400" />
+              <h1 className="text-3xl font-bold text-white">Sudoku Galaxy</h1>
+            </div>
+            <Button
+              variant="outline"
+              size="sm"
+              onClick={onOpenShop}
+              className="flex items-center gap-2 border-slate-600 text-slate-300 hover:text-white"
+            >
+              <ShoppingBag className="w-4 h-4" />
+              <span className="hidden sm:inline">Shop</span>
+            </Button>
           </div>
           <p className="text-slate-300">Choose your cosmic challenge</p>
         </div>
@@ -85,6 +98,29 @@ export function HomePage({ stats, onStartGame }: HomePageProps) {
             </CardContent>
           </Card>
         </div>
+
+        {/* Current Theme Display */}
+        <Card className="bg-slate-800/50 border-slate-600 mb-8">
+          <CardContent className="p-4">
+            <div className="flex items-center justify-between">
+              <div className="flex items-center gap-3">
+                <Palette className="w-5 h-5 text-indigo-400" />
+                <div>
+                  <div className="text-white font-medium">Current Theme</div>
+                  <div className="text-slate-400 text-sm capitalize">{stats.currentTheme}</div>
+                </div>
+              </div>
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={onOpenShop}
+                className="border-slate-600 text-slate-300 hover:text-white"
+              >
+                Change Theme
+              </Button>
+            </div>
+          </CardContent>
+        </Card>
 
         {/* Difficulty Selection */}
         <div className="space-y-4 mb-8">

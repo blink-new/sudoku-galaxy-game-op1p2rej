@@ -5,6 +5,7 @@ import { NumberInput } from './components/NumberInput';
 import { GameControls } from './components/GameControls';
 import { CosmeticsShop } from './components/CosmeticsShop';
 import { CompletionModal } from './components/CompletionModal';
+import { ThemeSelector } from './components/ThemeSelector';
 import { Button } from './components/ui/button';
 import { useSudokuGame } from './hooks/useSudokuGame';
 import { useGameStats } from './hooks/useGameStats';
@@ -37,6 +38,8 @@ function App() {
   const [currentView, setCurrentView] = useState<'home' | 'game'>('home');
   const [isShopOpen, setIsShopOpen] = useState(false);
   const [isCompletionModalOpen, setIsCompletionModalOpen] = useState(false);
+  const [isThemeSelectorOpen, setIsThemeSelectorOpen] = useState(false);
+  const [pendingDifficulty, setPendingDifficulty] = useState<Difficulty | null>(null);
   const [soundEnabled, setSoundEnabled] = useState(true);
   const [coinsEarned, setCoinsEarned] = useState(0);
 
@@ -89,9 +92,17 @@ function App() {
     }
   };
 
-  const handleStartGame = async (difficulty: Difficulty) => {
-    await startNewGame(difficulty);
-    setCurrentView('game');
+  const handleStartGame = (difficulty: Difficulty) => {
+    setPendingDifficulty(difficulty);
+    setIsThemeSelectorOpen(true);
+  };
+
+  const handleStartGameWithTheme = async (theme: typeof stats.currentTheme) => {
+    if (pendingDifficulty) {
+      await startNewGame(pendingDifficulty);
+      setCurrentView('game');
+      setPendingDifficulty(null);
+    }
   };
 
   const handleNewGame = async () => {
@@ -126,7 +137,40 @@ function App() {
 
   // Show home page or game based on current view
   if (currentView === 'home') {
-    return <HomePage stats={stats} onStartGame={handleStartGame} />;
+    return (
+      <>
+        <HomePage 
+          stats={stats} 
+          onStartGame={handleStartGame} 
+          onOpenShop={() => setIsShopOpen(true)}
+        />
+        
+        {/* Cosmetics Shop */}
+        <CosmeticsShop
+          isOpen={isShopOpen}
+          onClose={() => setIsShopOpen(false)}
+          coins={stats.coins}
+          cosmetics={cosmetics}
+          currentTheme={stats.currentTheme}
+          onPurchase={handlePurchaseCosmetic}
+          onApply={handleApplyTheme}
+        />
+
+        {/* Theme Selector */}
+        <ThemeSelector
+          isOpen={isThemeSelectorOpen}
+          onClose={() => {
+            setIsThemeSelectorOpen(false);
+            setPendingDifficulty(null);
+          }}
+          cosmetics={cosmetics}
+          currentTheme={stats.currentTheme}
+          difficulty={pendingDifficulty || 'easy'}
+          onStartGame={handleStartGameWithTheme}
+          onApplyTheme={handleApplyTheme}
+        />
+      </>
+    );
   }
 
   return (
