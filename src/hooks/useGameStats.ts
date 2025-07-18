@@ -38,6 +38,46 @@ const COSMETICS: Cosmetic[] = [
     cost: 150,
     unlocked: false,
     preview: 'Futuristic theme with neon highlights'
+  },
+  {
+    id: 'clouds',
+    name: 'Sky Clouds',
+    description: 'Float among the clouds with dreamy sky blue aesthetics',
+    cost: 300,
+    unlocked: false,
+    preview: 'Soft cloud backgrounds with sky blue palette'
+  },
+  {
+    id: 'inferno',
+    name: 'Inferno Blaze',
+    description: 'Feel the heat with blazing fire backgrounds and molten effects',
+    cost: 500,
+    unlocked: false,
+    preview: 'Fiery theme with red-orange gradients'
+  },
+  {
+    id: 'dubai',
+    name: 'Dubai Gold',
+    description: 'Experience luxury with golden desert aesthetics and Arabian elements',
+    cost: 800,
+    unlocked: false,
+    preview: 'Golden theme with luxury accents'
+  },
+  {
+    id: 'bahrain',
+    name: 'Bahrain Pearl',
+    description: 'Dive into tradition with pearl-inspired design and Gulf patterns',
+    cost: 1000,
+    unlocked: false,
+    preview: 'Traditional Gulf theme with red and white colors'
+  },
+  {
+    id: 'mars',
+    name: 'Mars Explorer',
+    description: 'Explore the red planet with Martian landscapes and space exploration vibes',
+    cost: 2000,
+    unlocked: false,
+    preview: 'Red planet theme with space exploration elements'
   }
 ];
 

@@ -174,7 +174,7 @@ function App() {
   }
 
   return (
-    <div className={cn('min-h-screen space-bg', `theme-${stats.currentTheme}`)}>
+    <div className={cn('min-h-screen', `theme-${stats.currentTheme}`)}>
       {/* Loading Overlay */}
       {isGenerating && (
         <div className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center">

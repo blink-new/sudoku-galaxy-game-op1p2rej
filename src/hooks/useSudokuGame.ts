@@ -288,21 +288,30 @@ export function useSudokuGame() {
   const useHint = useCallback(() => {
     if (gameState.hintsUsed >= gameState.maxHints) return;
 
-    // Find an empty cell and fill it with the correct value
+    // Find all empty cells
+    const emptyCells: [number, number][] = [];
     for (let row = 0; row < 9; row++) {
       for (let col = 0; col < 9; col++) {
         if (gameState.grid[row][col] === null) {
-          const correctValue = gameState.solution[row][col];
-          if (correctValue !== null) {
-            makeMove(row, col, correctValue);
-            setGameState(prev => ({
-              ...prev,
-              hintsUsed: prev.hintsUsed + 1
-            }));
-            return;
-          }
+          emptyCells.push([row, col]);
         }
       }
+    }
+
+    // If no empty cells, return
+    if (emptyCells.length === 0) return;
+
+    // Pick a random empty cell
+    const randomIndex = Math.floor(Math.random() * emptyCells.length);
+    const [row, col] = emptyCells[randomIndex];
+    const correctValue = gameState.solution[row][col];
+    
+    if (correctValue !== null) {
+      makeMove(row, col, correctValue);
+      setGameState(prev => ({
+        ...prev,
+        hintsUsed: prev.hintsUsed + 1
+      }));
     }
   }, [gameState.hintsUsed, gameState.maxHints, gameState.grid, gameState.solution, makeMove]);
 

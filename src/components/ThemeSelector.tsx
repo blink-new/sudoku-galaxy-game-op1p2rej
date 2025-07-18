@@ -34,6 +34,16 @@ export function ThemeSelector({
         return 'bg-gradient-to-br from-green-800 via-emerald-700 to-teal-800';
       case 'cyberpunk':
         return 'bg-gradient-to-br from-cyan-900 via-blue-900 to-slate-900';
+      case 'inferno':
+        return 'bg-gradient-to-br from-red-900 via-orange-800 to-yellow-700';
+      case 'dubai':
+        return 'bg-gradient-to-br from-amber-800 via-yellow-700 to-orange-600';
+      case 'bahrain':
+        return 'bg-gradient-to-br from-red-800 via-red-700 to-white';
+      case 'clouds':
+        return 'bg-gradient-to-br from-blue-300 via-white to-gray-200';
+      case 'mars':
+        return 'bg-gradient-to-br from-red-800 via-orange-700 to-amber-600';
     }
   };
 
@@ -120,7 +130,12 @@ export function ThemeSelector({
                           'w-5 h-5 rounded border flex items-center justify-center text-xs font-bold',
                           cosmetic.id === 'space' && 'border-indigo-400 text-indigo-200 bg-indigo-900/30',
                           cosmetic.id === 'nature' && 'border-green-400 text-green-200 bg-green-900/30',
-                          cosmetic.id === 'cyberpunk' && 'border-cyan-400 text-cyan-200 bg-cyan-900/30'
+                          cosmetic.id === 'cyberpunk' && 'border-cyan-400 text-cyan-200 bg-cyan-900/30',
+                          cosmetic.id === 'inferno' && 'border-red-400 text-red-200 bg-red-900/30',
+                          cosmetic.id === 'dubai' && 'border-amber-400 text-amber-200 bg-amber-900/30',
+                          cosmetic.id === 'bahrain' && 'border-red-400 text-red-200 bg-red-900/30',
+                          cosmetic.id === 'clouds' && 'border-blue-400 text-blue-800 bg-blue-100/30',
+                          cosmetic.id === 'mars' && 'border-orange-400 text-orange-200 bg-orange-900/30'
                         )}
                       >
                         {num <= 3 ? num : ''}

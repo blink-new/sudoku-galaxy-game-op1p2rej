@@ -43,7 +43,7 @@ export interface Move {
   type: 'number' | 'notes';
 }
 
-export type Theme = 'space' | 'nature' | 'cyberpunk';
+export type Theme = 'space' | 'nature' | 'cyberpunk' | 'inferno' | 'dubai' | 'bahrain' | 'clouds' | 'mars';
 
 export interface Cosmetic {
   id: Theme;

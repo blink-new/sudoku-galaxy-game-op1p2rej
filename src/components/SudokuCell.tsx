@@ -36,6 +36,7 @@ export function SudokuCell({
     'flex items-center justify-center relative',
     'transition-all duration-200 hover:bg-opacity-80',
     {
+      'unsolved': value === null, // Add unsolved class for empty cells
       'cell-highlight': isSelected,
       'cell-related': isRelated && !isSelected,
       'cell-duplicate': isDuplicate,

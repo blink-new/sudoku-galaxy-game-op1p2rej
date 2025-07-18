@@ -46,7 +46,7 @@ export function HomePage({ stats, onStartGame, onOpenShop }: HomePageProps) {
   };
 
   return (
-    <div className={`min-h-screen space-bg theme-${stats.currentTheme}`}>
+    <div className={`min-h-screen theme-${stats.currentTheme}`}>
       <div className="container mx-auto px-4 py-8 max-w-md">
         {/* Header */}
         <div className="text-center mb-8">
